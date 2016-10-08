@@ -20,22 +20,29 @@ public class Group {
 			
 			int openingSymbolIndex = getIndexOfSymbols(splitElement, OPEN_SYMBOLS);
 			if (hasSymbol(openingSymbolIndex)) {
+				
 				//found an open symbol, add expected closing symbol to the stack
 				stack.add(CLOSING_SYMBOLS[openingSymbolIndex]);
-			} else {				
-				int closingSymbolIndex = getIndexOfSymbols(splitElement, CLOSING_SYMBOLS);
+				
+			} else {
+				
+				int closingSymbolIndex = getIndexOfSymbols(splitElement, CLOSING_SYMBOLS);				
 				if (hasSymbol(closingSymbolIndex)) { //is a closed element
+					
 					//if no stack element matches up, we have a closing element too many - so count this
 					countClosedElements++; 
 					
 					if (stack != null && !stack.isEmpty()) {
-						if (!CLOSING_SYMBOLS[closingSymbolIndex].equals(stack.peek())) {
+						
+						if (!CLOSING_SYMBOLS[closingSymbolIndex].equals(stack.peek())) {							
 							//expected closing element does NOT match actual element
 							return false;
-						} else {
+							
+						} else {							
 							//nicely closed off symbol, so pop() to remove from stack, and count down to remove from counter
 							stack.pop();
 							countClosedElements--;
+							
 						}
 					}
 				}
@@ -55,19 +62,19 @@ public class Group {
 	}
 
 	public static void main(String args[]) {
-		System.out.println(Group.groupCheck("()") == true); // true
-		System.out.println(Group.groupCheck("({") == false); // false
+		System.out.println(Group.groupCheck("()") == true);
+		System.out.println(Group.groupCheck("({") == false);
 
-		System.out.println(Group.groupCheck("()") == true); // true);
+		System.out.println(Group.groupCheck("()") == true);
 
-		System.out.println(Group.groupCheck("({})") == true); // true);
-		System.out.println(Group.groupCheck("[[]()]") == true); // true);
-		System.out.println(Group.groupCheck("[{()}]") == true); // true);
+		System.out.println(Group.groupCheck("({})") == true);
+		System.out.println(Group.groupCheck("[[]()]") == true);
+		System.out.println(Group.groupCheck("[{()}]") == true);
 
-		System.out.println(Group.groupCheck("({") == false); // false);
-		System.out.println(Group.groupCheck("{(})") == false); // false);
-		System.out.println(Group.groupCheck("([]") == false); // false);
-		System.out.println(Group.groupCheck("[])") == false); // false);
+		System.out.println(Group.groupCheck("({") == false);
+		System.out.println(Group.groupCheck("{(})") == false);
+		System.out.println(Group.groupCheck("([]") == false);
+		System.out.println(Group.groupCheck("[])") == false);
 	}
 
 }
